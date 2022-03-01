@@ -5,11 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css " />
+    <title>Weather Dashboard</title>
 </head>
 
-<body>
+<body class="bg-secondary">
+    <div class="row no-gutters">
+        <header class="col-12 bg-dark text-light sticky-top d-flex flex-column p-1">
+            <h1 class="text-center">Weather Dashboard</h1>
+        </header>
+    </div>
+    <main>
+        <div class="row no-gutters bg-secondary">
+            <div id="search-col" class="col-3 p-2 border d-flex flex-column">
+                <h3 class="card-header text-center">Search For a City:</h3>
+                <form id="city-search" class="card-body">
+                    <label class="form-label" for="username">City:</label>
+                    <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" class="">Search</button>
+                </form>
+            </div>
 
+            <div id="current-weather" class="col-9 p-3 border">
+                <div class="row">
+                    <h3 class="col-12">Some City</h3>
+                    <span class="col-12">Temp:</span>
+                    <span class="col-12">Wind:</span>
+                    <span class="col-12">Humidity:</span>
+                    <span class="col-12">UV Index:</span>
+                </div>
+            </div>
+            <div id="five-day-forecast" class="col-9">
+                <h4 class="col-12 p-3 border">5-day Forecast:</h4>
+            </div>
+    </main>
+
+    <script src="./assets/js/script.js "></script>
 </body>
 
 </html>
