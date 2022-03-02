@@ -17,8 +17,8 @@
         </header>
     </div>
     <main>
-        <div class="row no-gutters bg-secondary">
-            <div id="search-col" class="col-3 p-2 border d-flex flex-column">
+        <div class="row no-gutters bg-secondary d-flex justify-content-end">
+            <div id="search-col" class="col-3 p-2 border">
                 <h3 class="card-header text-center">Search For a City:</h3>
                 <form id="city-search" class="card-body">
                     <label class="form-label" for="username">City:</label>
@@ -36,8 +36,17 @@
                     <span class="col-12">UV Index:</span>
                 </div>
             </div>
-            <div id="five-day-forecast" class="col-9">
-                <h4 class="col-12 p-3 border">5-day Forecast:</h4>
+            <div id="five-day-forecast" class="col-9 border">
+                <h4 class="col-12 p-3">5-day Forecast:</h4>
+                <div class="row">
+                    <div class="card">
+                        <span>Date</span>
+                        <i></i>
+                        <span>Temp:</span>
+                        <span>Wind:</span>
+                        <span>Humidity:</span>
+                    </div>
+                </div>
             </div>
     </main>
 
