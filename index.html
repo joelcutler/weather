@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="stylesheet" href="./assets/css/style.css " />
     <title>Weather Dashboard</title>
 </head>
@@ -38,16 +39,24 @@
             </div>
             <div id="five-day-forecast" class="col-9 border">
                 <h4 class="col-12 p-3">5-day Forecast:</h4>
-                <div class="row">
-                    <div class="card">
+                <div class="row ml-2 mb-3">
+                    <div class="card col-2 m-1 p-1">
                         <span>Date</span>
-                        <i></i>
+                        <i class="fas fa-cloud fa-lg"></i>
+                        <span>Temp:</span>
+                        <span>Wind:</span>
+                        <span>Humidity:</span>
+                    </div>
+                    <div class="card col-2 m-1 p-1">
+                        <span>Date</span>
+                        <i class="fas fa-sun fa-lg"></i>
                         <span>Temp:</span>
                         <span>Wind:</span>
                         <span>Humidity:</span>
                     </div>
                 </div>
             </div>
+
     </main>
 
     <script src="./assets/js/script.js "></script>
