@@ -1,15 +1,19 @@
-var getWeatherInfo = function() {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=a42035ac268e1618342dba6f73c69192";
+var apiKey = "a42035ac268e1618342dba6f73c69192";
+var locationApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=Salt Lake City&limit=5&appid=" + apiKey;
+var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid=" + apiKey;
 
-    fetch(apiUrl).then(function(response) {
+var getLocation = function() {
+
+    fetch(locationApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                displayWeather(data);
+                console.log(data);
             });
         } else {
-            alert("Error: Weather Data Not Found");
+            alert("Error: City Not Found");
+            return false;
         }
     });
 };
 
-getWeatherInfo();
+getLocation();
