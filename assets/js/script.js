@@ -54,12 +54,20 @@ var displayCurrentWeather = function() {
     setCurrentText("temp", "Temp: " + weatherInfo.current.temp + "°F");
     setCurrentText("wind", "Wind: " + weatherInfo.current.wind_speed + " MPH");
     setCurrentText("humidity", "Humidity: " + weatherInfo.current.humidity + "%");
-    setCurrentText("uv", "UV Index: " + weatherInfo.current.uvi);
+    setCurrentText("uv", "UV Index: ");
+    setCurrentText("uv-color", weatherInfo.current.uvi);
+    if (weatherInfo.current.uvi < 3) {
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-primary rounded px-1 pb-0");
+
+    } else if (weatherInfo.current.uvi >= 3 && weatherInfo.current.uvi < 6) {
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-success rounded px-1 pb-0");
+    } else if (weatherInfo.current.uvi >= 6 && weatherInfo.current.uvi < 8) {
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-warning rounded px-1 pb-0");
+    } else {
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-danger rounded px-1 pb-0");
+    }
 }
 
-// var setFiveDayText = function(id, text) {
-//     document.getElementById(`five-day-${id}`).textContent = text
-// }
 
 var displayFiveDayWeather = function() {
         forecastCardsContainerEl.innerHTML = `
@@ -72,16 +80,7 @@ var displayFiveDayWeather = function() {
             <span>Wind: ${forecastDay.wind_speed} MPH</span>
             <span>Humidity: ${forecastDay.humidity}%</span>
         </div>`}
-        }).join('')}`;
-
-
-        // if () {
-        // fiveDayIcon.setAttribute("class", "")
-        // }
-        // setFiveDayText("temp", "Temp: " + weatherInfo.current.temp + "°F");
-        // setFiveDayText("wind", "Wind: " + weatherInfo.current.wind_speed + " MPH");
-        // setFiveDayText("humidity", "Humidity: " + weatherInfo.current.humidity + "%");
-    
+        }).join('')}`;    
 }
 
 
