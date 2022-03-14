@@ -17,8 +17,13 @@ var getLocation = async function() {
             response.json().then(function(data) {
                 // console.log(data);
                 // console.log(data[0].lat, data[0].lon);
-                latAndLon = data[0]
-                getForecast();
+                if (!data.length) {
+                    alert("Error: City Not Found. Make sure you're entering a city name ONLY.");
+                } else {
+                    latAndLon = data[0]
+                    getForecast();
+                }
+
             });
         } else {
             alert("Error: City Not Found");
@@ -57,14 +62,14 @@ var displayCurrentWeather = function() {
     setCurrentText("uv", "UV Index: ");
     setCurrentText("uv-color", weatherInfo.current.uvi);
     if (weatherInfo.current.uvi < 3) {
-        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-primary rounded px-1 pb-0");
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-primary rounded px-1 pb-0 font-weight-bold");
 
     } else if (weatherInfo.current.uvi >= 3 && weatherInfo.current.uvi < 6) {
-        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-success rounded px-1 pb-0");
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-success rounded px-1 pb-0 font-weight-bold");
     } else if (weatherInfo.current.uvi >= 6 && weatherInfo.current.uvi < 8) {
-        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-warning rounded px-1 pb-0");
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-warning rounded px-1 pb-0 font-weight-bold");
     } else {
-        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-danger rounded px-1 pb-0");
+        document.getElementById(`current-uv-color`).setAttribute("class", "ml-2 bg-danger rounded px-1 pb-0 font-weight-bold");
     }
 }
 
@@ -73,7 +78,7 @@ var displayFiveDayWeather = function() {
         forecastCardsContainerEl.innerHTML = `
         ${weatherInfo.daily.map((forecastDay, index) => {
             if (index < 5) {
-        return `<div class="card col-2 m-1 p-1">
+        return `<div class="card col-10 mx-auto p-1 col-md-2 m-md-1 ">
             <span>${new Date(forecastDay.dt * 1000).toDateString()}</span>
             <img width="50" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png"/>
             <span>Temp: ${forecastDay.temp.day}°F</span>

@@ -19,16 +19,17 @@
     </div>
     <main>
         <div class="row no-gutters bg-secondary d-flex justify-content-end">
-            <div id="search-col" class="col-3 p-2 border">
+            <div id="search-col" class="col-12 col-md-3 p-2 border">
                 <h3 class="card-header text-center">Search For a City:</h3>
                 <form id="city-search" class="card-body">
                     <label class="form-label" for="username">City:</label>
-                    <input name="cityname" id="city-name" type="text" autofocus="true" class="form-input" />
-                    <button type="submit" class="">Search</button>
+                    <input name="cityname" id="city-name" type="text" autofocus="true" class="form-control" />
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-primary m-2 w-75 text-center">Search</button></div>
                 </form>
             </div>
 
-            <div id="current-weather" class="col-9 p-3 border">
+            <div id="current-weather" class="col-12 col-md-9 p-3 border">
                 <div class="row d-flex">
                     <h3 class="col-12 m-2" id="current-city-name"></h3>
                     <span class="col-12 m-2" id="current-temp"></span>
@@ -40,9 +41,9 @@
                     </div>
                 </div>
             </div>
-            <div id="five-day-forecast" class="col-9 border">
+            <div id="five-day-forecast" class="col-12 col-md-9 border">
                 <h4 class="col-12 p-3">5-day Forecast:</h4>
-                <div class="row ml-2 mb-3" id="forecast-cards">
+                <div class="row mb-3 justify-content-center" id="forecast-cards">
                     <!-- <div class="card col-2 m-1 p-1">
                         <span id="five-day-date"></span>
                         <i id="five-day-icon" class=""></i>
