@@ -1,19 +1,22 @@
 var cityFormEl = document.querySelector("#city-search");
 var cityInputEl = document.querySelector("#city-name");
+var currentWeather = document.querySelector("#current-weather");
 var city = "";
 var apiKey = "a42035ac268e1618342dba6f73c69192";
 var index = "";
-var latAndLon = ""
+var latAndLon = "";
+var weatherInfo = "";
 
 
-var getLocation = function() {
+var getLocation = async function() {
     var locationApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
-    fetch(locationApiUrl).then(function(response) {
+    await fetch(locationApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 // console.log(data);
                 // console.log(data[0].lat, data[0].lon);
                 latAndLon = data[0]
+                getForecast();
             });
         } else {
             alert("Error: City Not Found");
@@ -23,11 +26,14 @@ var getLocation = function() {
 };
 
 var getForecast = function() {
-    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latAndLon.lat + "&lon=" + latAndLon.lon + "&exclude=minutely,hourly&appid=" + apiKey;
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latAndLon.lat + "&lon=" + latAndLon.lon + "&exclude=minutely,hourly&units=imperial&appid=" + apiKey;
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 console.log(data);
+                weatherInfo = data;
+                displayCurrentWeather();
+
             });
         } else {
             alert("Error: Forecast Not Found");
@@ -36,19 +42,31 @@ var getForecast = function() {
     });
 };
 
-var formSubmitHandler = function(event) {
+var setCurrentText = function(id, text) {
+    document.getElementById(`current-${id}`).textContent = text
+    console.log(text);
+}
+var displayCurrentWeather = function() {
+    setCurrentText("city-name", latAndLon.name);
+    setCurrentText("temp", "Temp: " + weatherInfo.current.temp + "°F");
+    setCurrentText("wind", "Wind: " + weatherInfo.current.wind_speed + " MPH");
+    setCurrentText("humidity", "Humidity: " + weatherInfo.current.humidity + "%");
+    setCurrentText("uv", "UV Index: " + weatherInfo.current.uvi);
+}
+
+var formSubmitHandler = async function(event) {
     event.preventDefault();
     // get value from input element
     city = cityInputEl.value.trim();
     var pastSearchesEl = document.createElement("button");
     pastSearchesEl.textcontet = city;
     if (city) {
-        getLocation(city);
+        await getLocation(city).then(() => {
+            console.log(latAndLon);
+            // getForecast();
+            // displayCurrentWeather();
+        });
         // city.value = "";
-
-        if (latAndLon) {
-            getForecast();
-        }
     } else {
         alert("Please enter a city");
     }
@@ -56,6 +74,7 @@ var formSubmitHandler = function(event) {
 };
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
+
 
 
 
