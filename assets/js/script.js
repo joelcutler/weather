@@ -1,6 +1,8 @@
 var cityFormEl = document.querySelector("#city-search");
 var cityInputEl = document.querySelector("#city-name");
 var currentWeather = document.querySelector("#current-weather");
+var fiveDayIcon = document.querySelector("#five-day-icon");
+var forecastCardsContainerEl = document.querySelector("#forecast-cards");
 var city = "";
 var apiKey = "a42035ac268e1618342dba6f73c69192";
 var index = "";
@@ -33,6 +35,7 @@ var getForecast = function() {
                 console.log(data);
                 weatherInfo = data;
                 displayCurrentWeather();
+                displayFiveDayWeather();
 
             });
         } else {
@@ -44,15 +47,43 @@ var getForecast = function() {
 
 var setCurrentText = function(id, text) {
     document.getElementById(`current-${id}`).textContent = text
-    console.log(text);
+
 }
 var displayCurrentWeather = function() {
-    setCurrentText("city-name", latAndLon.name);
+    setCurrentText("city-name", `The Current Weather in ${latAndLon.name}, ${latAndLon.state}, ${latAndLon.country}`);
     setCurrentText("temp", "Temp: " + weatherInfo.current.temp + "°F");
     setCurrentText("wind", "Wind: " + weatherInfo.current.wind_speed + " MPH");
     setCurrentText("humidity", "Humidity: " + weatherInfo.current.humidity + "%");
     setCurrentText("uv", "UV Index: " + weatherInfo.current.uvi);
 }
+
+// var setFiveDayText = function(id, text) {
+//     document.getElementById(`five-day-${id}`).textContent = text
+// }
+
+var displayFiveDayWeather = function() {
+        forecastCardsContainerEl.innerHTML = `
+        ${weatherInfo.daily.map((forecastDay, index) => {
+            if (index < 5) {
+        return `<div class="card col-2 m-1 p-1">
+            <span>${new Date(forecastDay.dt * 1000).toDateString()}</span>
+            <img width="50" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png"/>
+            <span>Temp: ${forecastDay.temp.day}°F</span>
+            <span>Wind: ${forecastDay.wind_speed} MPH</span>
+            <span>Humidity: ${forecastDay.humidity}%</span>
+        </div>`}
+        }).join('')}`;
+
+
+        // if () {
+        // fiveDayIcon.setAttribute("class", "")
+        // }
+        // setFiveDayText("temp", "Temp: " + weatherInfo.current.temp + "°F");
+        // setFiveDayText("wind", "Wind: " + weatherInfo.current.wind_speed + " MPH");
+        // setFiveDayText("humidity", "Humidity: " + weatherInfo.current.humidity + "%");
+    
+}
+
 
 var formSubmitHandler = async function(event) {
     event.preventDefault();
