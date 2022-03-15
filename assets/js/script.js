@@ -3,7 +3,9 @@ var cityInputEl = document.querySelector("#city-name");
 var currentWeather = document.querySelector("#current-weather");
 var fiveDayIcon = document.querySelector("#five-day-icon");
 var forecastCardsContainerEl = document.querySelector("#forecast-cards");
+var savedBox = document.querySelector("#saved-box");
 var city = "";
+var searchedCities = [];
 var apiKey = "a42035ac268e1618342dba6f73c69192";
 var index = "";
 var latAndLon = "";
@@ -96,19 +98,39 @@ var formSubmitHandler = async function(event) {
     var pastSearchesEl = document.createElement("button");
     pastSearchesEl.textcontet = city;
     if (city) {
+        searchedCities.push(city);
+        saveSearch();
+        displaySavedSearches();
         await getLocation(city).then(() => {
             console.log(latAndLon);
-            // getForecast();
-            // displayCurrentWeather();
+            cityInputEl.value = "";
         });
-        // city.value = "";
     } else {
         alert("Please enter a city");
     }
     // console.log(event);
 };
 
+var saveSearch = function(){
+var previousCities = new Set(searchedCities);
+console.log(previousCities);
+localStorage.setItem("previous cities", JSON.stringify( previousCities));
+}
+var displaySavedSearches = function(){
+    var localSavedCities = JSON.parse(localStorage.getItem("previous cities"));
+    if (localSavedCities && localSavedCities.length){
+    for (i = 0 ; i < localSavedCities.length ; i++) {
+    var btn = document.createElement("button");
+    btn.textContent = localSavedCities[i]
+    savedBox.appendChild(btn);
+    }}
+// vv this executes on pgload
+}
+// ^^ this executes on pgload
+
 cityFormEl.addEventListener("submit", formSubmitHandler);
+
+
 
 
 
