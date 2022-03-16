@@ -112,19 +112,47 @@ var formSubmitHandler = async function(event) {
 };
 
 var saveSearch = function(){
-var previousCities = new Set(searchedCities);
-console.log(previousCities);
-localStorage.setItem("previous cities", JSON.stringify( previousCities));
+// var previousCities = new Set(searchedCities);
+// console.log(previousCities);
+
+localStorage.setItem("previous cities", JSON.stringify( searchedCities));
 }
-var displaySavedSearches = function(){
+
+
+var displaySavedSearches = function() {
     var localSavedCities = JSON.parse(localStorage.getItem("previous cities"));
+    console.log(localSavedCities);
     if (localSavedCities && localSavedCities.length){
-    for (i = 0 ; i < localSavedCities.length ; i++) {
-    var btn = document.createElement("button");
-    btn.textContent = localSavedCities[i]
-    savedBox.appendChild(btn);
-    }}
+        var cityBtns = '';
+    for (var i = 0 ; i < localSavedCities.length ; i++) {
+    cityBtns += `<button id="${localSavedCities[i]}">${localSavedCities[i]}</button>`
+    }
+    savedBox.innerHTML = cityBtns
+    }
 }
+
+var displayPreviousWeather = function(e){
+    city = e.target.id;
+    getLocation();
+    // console.log(e.target.id);
+}
+
+savedBox.addEventListener("click", function(e){displayPreviousWeather(e)});
+
+
+
+
+
+// var setPreviousItems = async function(event) {
+//     const prevSearchedCitiesEl =  document.getElementById('previous-cities');
+//     const localStorageArr = ['Boston', 'Provo'];
+//     let cityBtns = '';
+//     for (let i = 0; i < localStorageArr.length; i++) {
+//         // add styling and click listener as well
+//      cityBtns += `<button id="${localStorageArr[i]}">${localStorageArr[i]}</button>`
+//     }
+//       prevSearchedCitiesEl.innerHTML = cityBtns;
+//   };
 // vv this executes on pgload
 // }()
 // ^^ this executes on pgload
