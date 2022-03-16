@@ -13,7 +13,7 @@ var weatherInfo = "";
 
 
 var getLocation = async function() {
-    var locationApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
+    var locationApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
     await fetch(locationApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
@@ -124,8 +124,9 @@ var displaySavedSearches = function(){
     btn.textContent = localSavedCities[i]
     savedBox.appendChild(btn);
     }}
-// vv this executes on pgload
 }
+// vv this executes on pgload
+// }()
 // ^^ this executes on pgload
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
