@@ -39,7 +39,7 @@ var getForecast = function() {
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                // console.log(data);
                 weatherInfo = data;
                 displayCurrentWeather();
                 displayFiveDayWeather();
@@ -125,7 +125,7 @@ var displaySavedSearches = function() {
     if (localSavedCities && localSavedCities.length){
         var cityBtns = '';
     for (var i = 0 ; i < localSavedCities.length ; i++) {
-    cityBtns += `<button id="${localSavedCities[i]}">${localSavedCities[i]}</button>`
+    cityBtns += `<button class="text-capitalize" id="${localSavedCities[i]}">${localSavedCities[i]}</button>`
     }
     savedBox.innerHTML = cityBtns
     }
